@@ -1,9 +1,25 @@
 <template>
-  <div class="container mx-auto">Erstelle deinen Essensplan</div>
+  <div class="container mx-auto">
+    <button class="btn btn-primary" @click="plan">
+      Erstelle neuen Essensplan!
+    </button>
+    <table class="table"></table>
+  </div>
 </template>
 
 <script lang="ts">
 import { Vue } from "vue-class-component";
 
-export default class Home extends Vue {}
+import Mealplan from "../../lib/Mealplan";
+import { myRecipes } from "../../lib/Cookbook";
+
+export default class Plan extends Vue {
+  plan(): void {
+    console.log("planning now...");
+
+    const plan: Mealplan = new Mealplan(new Date(), [], []);
+
+    console.log(plan);
+  }
+}
 </script>
