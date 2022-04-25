@@ -6,4 +6,8 @@ export default class Recipe {
   description?: string;
   ingredients?: [Ingredient];
   steps?: [Step];
+
+  constructor(title: string) {
+    this.title = title;
+  }
 }
