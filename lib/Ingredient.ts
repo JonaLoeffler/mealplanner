@@ -1,4 +1,4 @@
-type unit = "pc" | "kg" | "g" | "ml" | "l";
+type unit = "pc" | "kg" | "g" | "ml" | "l" | "cup" | "pound" | "tsp";
 
 export default class Ingredient {
   name: string;
