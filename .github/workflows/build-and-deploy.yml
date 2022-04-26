@@ -27,8 +27,8 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET_FRONTEND }}
           EXCLUDE:
-            - "dist/node_modules"
-            - "dist/server"
+            - dist/node_modules
+            - dist/server
 
       - name: Deploy backend 🚀
         uses: easingthemes/ssh-deploy@main
@@ -40,11 +40,11 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET_BACKEND }}
           EXCLUDE:
-            - "dist/index.html"
-            - "dist/service-worker.js"
-            - "dist/manifest.json"
-            - "dist/favicon.ico"
-            - "dist/robots.txt"
-            - "dist/css"
-            - "dist/img"
-            - "dist/js"
+            - dist/index.html
+            - dist/service-worker.js
+            - dist/manifest.json
+            - dist/favicon.ico
+            - dist/robots.txt
+            - dist/css
+            - dist/img
+            - dist/js
