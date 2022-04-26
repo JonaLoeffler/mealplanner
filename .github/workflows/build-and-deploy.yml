@@ -12,7 +12,39 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+      - name: Install and Build 🔧
         run: |
           npm install
           npm run build
+
+      - name: Deploy frontend 🚀
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET_FRONTEND }}
+          EXCLUDE:
+            - "dist/node_modules"
+            - "dist/server"
+
+      - name: Deploy backend 🚀
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET_BACKEND }}
+          EXCLUDE:
+            - "dist/index.html"
+            - "dist/service-worker.js"
+            - "dist/manifest.json"
+            - "dist/favicon.ico"
+            - "dist/robots.txt"
+            - "dist/css"
+            - "dist/img"
+            - "dist/js"
