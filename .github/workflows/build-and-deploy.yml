@@ -32,6 +32,8 @@ jobs:
         run: |
           npm install --only=prod
           cp -r node_modules dist/server
+          cp package.json dist/server/package.json
+          cp package-lock.json dist/server/package-lock.json
 
       - name: Deploy backend 🚀
         uses: easingthemes/ssh-deploy@main
