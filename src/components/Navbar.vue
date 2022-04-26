@@ -20,7 +20,7 @@
       </button>
     </div>
     <div class="flex-1 px-2 mx-2">
-      <span class="text-lg font-bold"> With two icons </span>
+      <span class="text-lg font-bold"> Meal Planner </span>
     </div>
     <div class="flex-none">
       <button class="btn btn-square btn-ghost">
