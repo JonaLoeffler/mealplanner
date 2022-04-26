@@ -17,12 +17,28 @@ jobs:
           npm install
           npm run build
 
-      - name: Deploy 🚀
+      - name: Deploy frontend 🚀
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO"
+          ARGS: "-avzr"
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
+          TARGET: ${{ secrets.REMOTE_TARGET_FRONTEND }}
+          EXCLUDE: "server/, dist/server/"
+
+      - name: Install production dependencies 🔧
+        run: |
+          npm install --only=prod
+          cp -r node_modules dist/server
+
+      - name: Deploy backend 🚀
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-avzr"
+          SOURCE: "dist/server"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET_BACKEND }}
