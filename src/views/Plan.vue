@@ -10,8 +10,7 @@
 <script lang="ts">
 import { Vue } from "vue-class-component";
 
-import Mealplan from "../../lib/Mealplan";
-import { myRecipes } from "../../lib/Cookbook";
+import { Mealplan } from "../../lib/types";
 
 export default class Plan extends Vue {
   plan(): void {

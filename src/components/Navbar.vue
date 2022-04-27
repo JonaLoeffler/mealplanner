@@ -3,7 +3,10 @@
     class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box"
   >
     <div class="flex-none">
-      <button class="btn btn-square btn-ghost">
+      <label
+        for="my-navbar-drawer"
+        class="btn btn-square btn-ghost drawer-button"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -17,7 +20,7 @@
             d="M4 6h16M4 12h16M4 18h16"
           ></path>
         </svg>
-      </button>
+      </label>
     </div>
     <div class="flex-1 px-2 mx-2">
       <span class="text-lg font-bold"> Jona's Essensplan-App 🍲 </span>

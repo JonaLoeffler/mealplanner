@@ -1,6 +1,6 @@
-import Recipe from "../lib/Recipe";
+import { Cookbook } from "../lib/types";
 
-const recipes: Recipe[] = [
+const recipes: Cookbook = [
   {
     title: "Spaghetti Aglio e Olio",
     portions: 2,
@@ -50,6 +50,30 @@ const recipes: Recipe[] = [
           "Add the pasta, drained, with about 1/4 cup reserved pasta cooking water. Squeeze lemon juice over top, and mix into the pasta with the fresh parsley. If sauce is too watery, continue to cook for 1-3 minutes, until pasta has absorbed more liquid. Season with salt and pepper, and serve.",
       },
     ],
+  },
+  {
+    title: "Spaghetti Carbonara",
+  },
+  {
+    title: "Chili sin carne",
+  },
+  {
+    title: "Lasagne",
+  },
+  {
+    title: "Spaghetti Bolognese",
+  },
+  {
+    title: "Brot",
+  },
+  {
+    title: "Tacosalat",
+  },
+  {
+    title: "Ofengemüse",
+  },
+  {
+    title: "Toast Hawaii",
   },
 ];
 
