@@ -1,4 +1,4 @@
-type unit = "pc" | "kg" | "g" | "ml" | "l" | "cup" | "pound" | "tsp";
+type unit = "pc" | "Stk." | "kg" | "g" | "ml" | "l" | "cup" | "pound" | "tsp";
 
 class Mealplan {
   readonly start: Date;
@@ -46,4 +46,4 @@ class Step {
 
 type Cookbook = Recipe[];
 
-export { Cookbook, Ingredient, Mealplan, Recipe, Step };
+export { Cookbook, Ingredient, Mealplan, Recipe, Step, unit };

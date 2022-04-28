@@ -19,11 +19,12 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { defineComponent } from "vue";
 import Navbar from "@/components/Navbar.vue";
 import SideMenu from "@/components/SideMenu.vue";
 
-@Options({
+export default defineComponent({
+  name: "App",
   components: {
     Navbar,
     SideMenu,
@@ -31,10 +32,9 @@ import SideMenu from "@/components/SideMenu.vue";
   watch: {
     $route() {
       this.$nextTick(() => {
-        this.$refs.navbar.checked = false;
+        (this.$refs.navbar as { checked: boolean }).checked = false;
       });
     },
   },
-})
-export default class App extends Vue {}
+});
 </script>

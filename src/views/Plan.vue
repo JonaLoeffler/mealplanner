@@ -8,17 +8,20 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
-
 import { Mealplan } from "../../lib/types";
 
-export default class Plan extends Vue {
-  plan(): void {
-    console.log("planning now...");
+import { defineComponent } from "vue";
 
-    const plan: Mealplan = new Mealplan(new Date(), [], []);
+export default defineComponent({
+  name: "Plan",
+  methods: {
+    plan(): void {
+      console.log("planning now...");
 
-    console.log(plan);
-  }
-}
+      const plan: Mealplan = new Mealplan(new Date(), [], []);
+
+      console.log(plan);
+    },
+  },
+});
 </script>

@@ -46,7 +46,9 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import { defineComponent } from "vue";
 
-export default class Navbar extends Vue {}
+export default defineComponent({
+  name: "Navbar",
+});
 </script>

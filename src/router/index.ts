@@ -1,12 +1,18 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 import Plan from "@/views/Plan.vue";
+import Home from "@/views/Home.vue";
 import Recipe from "@/views/Recipe.vue";
 import Recipes from "@/views/Recipes.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    name: "Home",
+    component: Home,
+  },
+  {
+    path: "/plan",
     name: "Plan",
     component: Plan,
   },
@@ -22,9 +28,9 @@ const routes: Array<RouteRecordRaw> = [
   },
 ];
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  linkActiveClass: "active",
+  linkExactActiveClass: "exact-active",
 });
-
-export default router;

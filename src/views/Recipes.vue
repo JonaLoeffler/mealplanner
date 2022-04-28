@@ -5,23 +5,31 @@
         <span>Alle Rezepte</span>
       </li>
       <li v-for="recipe in recipes" v-bind:key="recipe.title">
-        <router-link to="/recipe">{{ recipe.title }}</router-link>
+        <a class="" v-on:click="selectRecipe(recipe)">
+          {{ recipe.title }}
+        </a>
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
+import { mapState, mapMutations } from "vuex";
 import { defineComponent } from "vue";
-
-import recipes from "../../data/recipes";
+import { Recipe } from "../../lib/types";
 
 export default defineComponent({
   name: "Recipes",
-  data() {
-    return {
-      recipes: recipes,
-    };
+  computed: {
+    ...mapState(["recipes"]),
+  },
+  methods: {
+    ...mapMutations(["setSelected"]),
+    selectRecipe(recipe: Recipe) {
+      this.setSelected(recipe);
+
+      this.$router.push("/recipe");
+    },
   },
 });
 </script>
