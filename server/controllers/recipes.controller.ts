@@ -1,6 +1,6 @@
 import recipes from "../../data/recipes";
-import { Request, Response } from "express";
+import { Response } from "express";
 
-export const index = (req: Request, res: Response) => {
-  res.json(recipes);
+export const index = (res: Response): Response => {
+  return res.json(recipes);
 };

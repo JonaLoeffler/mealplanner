@@ -3,13 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "concurrently \"npm run dev:server\" \"npm run dev:client\" --raw",
-    "build": "concurrently \"npm run build:server\" \"npm run build:client\"",
-    "lint": "vue-cli-service lint",
+    "lint:client": "vue-cli-service lint",
+    "lint:server": "npx eslint data/**/*.ts lib/**/*.ts server/**/*.ts",
+    "lint": "concurrently \"npm run lint:server\" \"npm run lint:client\"",
+
+    "fix:client": "vue-cli-service lint --fix",
+    "fix:server": "npx eslint data/**/*.ts lib/**/*.ts server/**/*.ts --fix",
+    "fix": "concurrently \"npm run fix:server\" \"npm run fix:client\"",
+
     "build:client": "vue-cli-service build",
     "build:server": "rimraf dist/server && tsc -p tsconfig.server.json",
+    "build": "concurrently \"npm run build:server\" \"npm run build:client\"",
+
     "dev:client": "vue-cli-service serve",
-    "dev:server": "nodemon --config ./nodemon.config.json"
+    "dev:server": "nodemon --config ./nodemon.config.json",
+    "serve": "concurrently \"npm run dev:server\" \"npm run dev:client\" --raw"
   },
   "dependencies": {
     "body-parser": "^1.19.1",
@@ -63,6 +71,7 @@
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
       "vue-cli-service lint",
+      "npx eslint data/**/*.ts lib/**/*.ts server/**/*.ts",
       "git add"
     ]
   }

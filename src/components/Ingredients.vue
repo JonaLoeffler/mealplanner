@@ -1,12 +1,19 @@
 <template>
   <div>
-    <h2 class="font-bold">Zutaten</h2>
+    <h2 class="font-bold">
+      Zutaten
+
+      <button class="btn btn-xs capitalize float-right" @click="toggle">
+        {{ target }}
+      </button>
+    </h2>
+
     <div class="overflow-x-auto">
       <table class="table table-compact w-full">
         <tbody>
-          <tr v-for="ingredient in ingredients" v-bind:key="ingredient">
-            <td class="text-right">{{ formatAmount(ingredient) }}</td>
-            <td>{{ formatUnit(ingredient) }}</td>
+          <tr v-for="ingredient in converted" v-bind:key="ingredient">
+            <td class="text-right">{{ ingredient.amount.toFixed(1) }}</td>
+            <td>{{ ingredient.unit }}</td>
             <td>{{ ingredient.name }}</td>
           </tr>
         </tbody>
@@ -17,7 +24,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Ingredient, unit } from "../../lib/types";
+import { Ingredient } from "../../lib/types";
+import { convert, Target } from "../../lib/convert";
 
 export default defineComponent({
   name: "Ingredients",
@@ -27,32 +35,28 @@ export default defineComponent({
       required: true,
     },
   },
+  data(): { target: Target } {
+    return {
+      target: "metric",
+    };
+  },
   methods: {
-    formatAmount(ingredient: Ingredient): string {
-      switch (ingredient.unit) {
-        case "pound":
-          return (ingredient.amount * 453.5924).toFixed(1);
-        case "cup":
-          return (ingredient.amount * 236.5882).toFixed(1);
-        case "tsp":
-          return (ingredient.amount * 4.9289215).toFixed(1);
-        default:
-          return ingredient.amount.toFixed(1);
-      }
+    toggle: function () {
+      const next: { metric: Target; imperial: Target; original: Target } = {
+        metric: "imperial",
+        imperial: "original",
+        original: "metric",
+      };
+
+      this.target = next[this.target];
     },
-    formatUnit(ingredient: Ingredient): unit {
-      switch (ingredient.unit) {
-        case "pound":
-          return "g";
-        case "cup":
-          return "ml";
-        case "tsp":
-          return "g";
-        case "pc":
-          return "Stk.";
-        default:
-          return ingredient.unit;
-      }
+  },
+  computed: {
+    conversion: function () {
+      return (ingredient: Ingredient) => convert(ingredient, this.target);
+    },
+    converted: function () {
+      return this.ingredients.map(this.conversion);
     },
   },
 });

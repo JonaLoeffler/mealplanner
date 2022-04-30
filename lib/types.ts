@@ -1,4 +1,4 @@
-type unit = "pc" | "Stk." | "kg" | "g" | "ml" | "l" | "cup" | "pound" | "tsp";
+type unit = "Stk." | "kg" | "g" | "ml" | "l" | "pc" | "cup" | "pound" | "tsp";
 
 class Mealplan {
   readonly start: Date;
