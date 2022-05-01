@@ -3,7 +3,7 @@
     <!-- Sidebar content here -->
     <li>
       <router-link to="/"
-        ><h1 class="text-xl mb-2">🍲 Jona's Essensplaner</h1></router-link
+        ><h1 class="text-xl my-2">🍲 Jona's Essensplaner</h1></router-link
       >
     </li>
 

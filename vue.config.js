@@ -4,9 +4,9 @@ module.exports = {
     devtool: "source-map",
   },
   pwa: {
-    name: "Meal Planner",
-    themeColor: "#03a9f4",
-    msTileColor: "#3b3b3b",
+    name: "Essensplan",
+    themeColor: "#302f3d",
+    msTileColor: "#302f3d",
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black",
   },
