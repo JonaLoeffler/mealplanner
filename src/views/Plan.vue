@@ -1,26 +1,40 @@
 <template>
-  <div class="container mx-auto">
-    <button class="btn btn-primary" @click="plan">
-      Erstelle neuen Essensplan!
-    </button>
-    <table class="table"></table>
+  <div class="">
+    <router-view class="" />
+
+    <ul class="steps w-full absolute bottom-0 mb-2">
+      <li
+        class="step"
+        :class="classObject(step.name)"
+        v-for="step in steps"
+        v-bind:key="step.name"
+      >
+        <router-link :to="{ name: step.name }">{{ step.title }}</router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { Mealplan } from "../../lib/types";
-
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Plan",
+  data() {
+    return {
+      steps: [
+        { name: "Date", title: "Zeitraum" },
+        { name: "Meals", title: "Mahlzeiten" },
+        { name: "Groceries", title: "Einkaufsliste" },
+      ],
+    };
+  },
   methods: {
-    plan(): void {
-      console.log("planning now...");
+    classObject: function (name: string) {
+      const current = this.steps.findIndex((s) => s.name == this.$route.name);
+      const index = this.steps.findIndex((s) => s.name == name);
 
-      const plan: Mealplan = new Mealplan(new Date(), [], []);
-
-      console.log(plan);
+      return { "step-primary": current >= index };
     },
   },
 });

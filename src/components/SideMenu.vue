@@ -14,7 +14,7 @@
     </li>
 
     <li>
-      <router-link to="/plan">➕Neuen Plan erstellen</router-link>
+      <router-link :to="{ name: 'Date' }">➕Neuen Plan erstellen</router-link>
     </li>
   </ul>
 </template>
