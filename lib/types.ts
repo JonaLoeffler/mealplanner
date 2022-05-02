@@ -1,14 +1,28 @@
+import { DateTime } from "luxon";
+
 type unit = "Stk." | "kg" | "g" | "ml" | "l" | "pc" | "cup" | "pound" | "tsp";
 
-class Mealplan {
-  readonly start: Date;
-  readonly lunches: Recipe[];
-  readonly dinners: Recipe[];
+class Day {
+  readonly date: DateTime;
+  readonly lunch: Recipe;
+  readonly dinner: Recipe;
 
-  constructor(start: Date, lunches: Recipe[], dinners: Recipe[]) {
+  constructor(date: DateTime, lunch: Recipe, dinner: Recipe) {
+    this.date = date;
+    this.lunch = lunch;
+    this.dinner = dinner;
+  }
+}
+
+class Mealplan {
+  start: DateTime;
+  end: DateTime;
+  days?: Day[];
+
+  constructor(start: DateTime, end: DateTime, days: Day[]) {
     this.start = start;
-    this.lunches = lunches;
-    this.dinners = dinners;
+    this.end = end;
+    this.days = days;
   }
 }
 
@@ -46,4 +60,4 @@ class Step {
 
 type Cookbook = Recipe[];
 
-export { Cookbook, Ingredient, Mealplan, Recipe, Step, unit };
+export { Cookbook, Ingredient, Mealplan, Recipe, Step, unit, Day };

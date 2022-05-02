@@ -14,19 +14,19 @@
 </template>
 
 <script lang="ts">
-import { mapState, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { defineComponent } from "vue";
 import { Recipe } from "../../lib/types";
 
 export default defineComponent({
   name: "Recipes",
   computed: {
-    ...mapState(["recipes"]),
+    ...mapGetters({ recipes: "recipes/all" }),
   },
   methods: {
-    ...mapMutations(["setSelected"]),
+    ...mapMutations({ select: "recipes/select" }),
     selectRecipe(recipe: Recipe) {
-      this.setSelected(recipe);
+      this.select(recipe);
 
       this.$router.push("/recipe");
     },

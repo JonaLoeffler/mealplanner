@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import Ingredients from "./../components/Ingredients.vue";
 
 export default defineComponent({
@@ -33,7 +33,7 @@ export default defineComponent({
     Ingredients,
   },
   computed: {
-    ...mapState({ recipe: "selected" }),
+    ...mapGetters({ recipe: "recipes/selected" }),
   },
 });
 </script>
