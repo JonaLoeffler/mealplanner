@@ -45,7 +45,7 @@
           v-for="button in endDates"
           v-bind:key="button.text"
           ><button class="btn btn-xs" @click="this.mealplan.end = button.value">
-            {{ button.value.setLocale('de').toFormat('EEE, dd.mm.') }}
+            {{ button.value.setLocale("de").toFormat("EEE, dd.mm.") }}
           </button></span
         >
       </label>
