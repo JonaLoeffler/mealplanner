@@ -10,20 +10,20 @@
         name="start"
         type="date"
         class="input input-bordered w-full"
-        value=""
+        :value="mealplan.start.toFormat('yyyy-mm-dd')"
+        @input="mealplan.start = $event.target.value"
       />
       <label class="label">
-        <span class="label-text-alt"
-          ><button class="btn btn-xs">Heute</button></span
-        >
-        <span class="label-text-alt"
-          ><button class="btn btn-xs">Morgen</button></span
-        >
-        <span class="label-text-alt"
-          ><button class="btn btn-xs">Übermorgen</button></span
-        >
-        <span class="label-text-alt"
-          ><button class="btn btn-xs">in 3 Tagen</button></span
+        <span
+          class="label-text-alt"
+          v-for="button in startDates"
+          v-bind:key="button.text"
+          ><button
+            class="btn btn-xs"
+            @click="this.mealplan.start = button.value"
+          >
+            {{ button.text }}
+          </button></span
         >
       </label>
     </div>
@@ -36,21 +36,67 @@
         name="start"
         type="date"
         class="input input-bordered w-full"
-        value=""
+        :value="mealplan.end.toFormat('yyyy-mm-dd')"
+        @input="mealplan.end = $event.target.value"
       />
+      <label class="label">
+        <span
+          class="label-text-alt"
+          v-for="button in endDates"
+          v-bind:key="button.text"
+          ><button class="btn btn-xs" @click="this.mealplan.end = button.value">
+            {{ button.value.setLocale('de').toFormat('EEE, dd.mm.') }}
+          </button></span
+        >
+      </label>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import { DateTime } from "luxon";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "SelectTimePeriod",
   data() {
     return {
-      start: Date.now(),
-      end: Date.now(),
+      startDates: [
+        {
+          text: "Heute",
+          value: DateTime.now().plus({ days: 0 }),
+        },
+        {
+          text: "Morgen",
+          value: DateTime.now().plus({ days: 1 }),
+        },
+        {
+          text: "Übermorgen",
+          value: DateTime.now().plus({ days: 2 }),
+        },
+        {
+          text: "in 3 Tagen",
+          value: DateTime.now().plus({ days: 3 }),
+        },
+      ],
+      endDates: [
+        {
+          value: DateTime.now().plus({ days: 4 }),
+        },
+        {
+          value: DateTime.now().plus({ days: 5 }),
+        },
+        {
+          value: DateTime.now().plus({ days: 6 }),
+        },
+        {
+          value: DateTime.now().plus({ days: 7 }),
+        },
+      ],
+      mealplan: {
+        start: DateTime.now(),
+        end: DateTime.now().plus({ days: 4 }),
+      },
     };
   },
 });
