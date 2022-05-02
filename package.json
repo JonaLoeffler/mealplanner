@@ -6,15 +6,12 @@
     "lint:client": "vue-cli-service lint",
     "lint:server": "npx eslint data/**/*.ts lib/**/*.ts server/**/*.ts",
     "lint": "concurrently \"npm run lint:server\" \"npm run lint:client\"",
-
     "fix:client": "vue-cli-service lint --fix",
     "fix:server": "npx eslint data/**/*.ts lib/**/*.ts server/**/*.ts --fix",
     "fix": "concurrently \"npm run fix:server\" \"npm run fix:client\"",
-
     "build:client": "vue-cli-service build",
     "build:server": "rimraf dist/server && tsc -p tsconfig.server.json",
     "build": "concurrently \"npm run build:server\" \"npm run build:client\"",
-
     "dev:client": "vue-cli-service serve",
     "dev:server": "nodemon --config ./nodemon.config.json",
     "serve": "concurrently \"npm run dev:server\" \"npm run dev:client\" --raw"
@@ -35,7 +32,7 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-pwa": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-router": "~5.0.4",
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
