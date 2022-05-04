@@ -39,7 +39,7 @@ const convert = function (ingredient: Ingredient, target: Target): Ingredient {
   };
 };
 
-const convertToMetric = (ingredient: Ingredient) =>
+const convertToMetric = (ingredient: Ingredient): Ingredient =>
   convert(ingredient, "metric");
 
 export { convert, convertToMetric, Target };
