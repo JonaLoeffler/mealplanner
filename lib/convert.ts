@@ -7,16 +7,16 @@ type Targets<Target> = Map<Target, Conversion<unit>>;
 
 const metric: Conversion<unit> = new Map([
   ["pc", { target: "Stk.", factor: 1 }],
-  ["cup", { target: "g", factor: 236.5882 }],
+  ["cup", { target: "ml", factor: 284.1306 }],
   ["pound", { target: "g", factor: 453.5924 }],
-  ["tsp", { target: "g", factor: 4.9289215 }],
+  ["tsp", { target: "ml", factor: 5.919388 }],
 ]);
 
 const imperial: Conversion<unit> = new Map([
   ["Stk.", { target: "pc", factor: 1 }],
-  ["kg", { target: "kg", factor: 1 }],
+  ["kg", { target: "pound", factor: 2.204623 }],
   ["g", { target: "g", factor: 1 }],
-  ["l", { target: "l", factor: 1 }],
+  ["l", { target: "l", factor: 3.519508 }],
 ]);
 
 const original: Conversion<unit> = new Map([]);
