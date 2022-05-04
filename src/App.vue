@@ -1,5 +1,5 @@
 <template>
-  <div class="drawer h-screen w-full rounded">
+  <div class="drawer h-screen w-screen">
     <input
       id="my-navbar-drawer"
       type="checkbox"
@@ -9,7 +9,10 @@
     <div class="drawer-content">
       <!-- Page content here -->
       <navbar />
-      <router-view />
+
+      <div id="content" class="p-2">
+        <router-view />
+      </div>
     </div>
     <div class="drawer-side">
       <label for="my-navbar-drawer" class="drawer-overlay"></label>
@@ -38,3 +41,10 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+#content {
+  height: calc(100vh - 64px);
+  overflow: auto;
+}
+</style>

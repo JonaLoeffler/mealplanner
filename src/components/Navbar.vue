@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box"
-  >
+  <div class="navbar shadow-lg bg-neutral text-neutral-content rounded-box">
     <div class="flex-none">
       <label
         for="my-navbar-drawer"

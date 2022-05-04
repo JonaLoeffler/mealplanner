@@ -24,8 +24,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Ingredient } from "../../lib/types";
-import { convert, Target } from "../../lib/convert";
+import { Ingredient } from "../../../../lib/types";
+import { convert, Target } from "../../../../lib/convert";
 
 export default defineComponent({
   name: "Ingredients",

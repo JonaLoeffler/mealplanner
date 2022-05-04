@@ -4,20 +4,23 @@ type unit = "Stk." | "kg" | "g" | "ml" | "l" | "pc" | "cup" | "pound" | "tsp";
 
 class Day {
   readonly date: DateTime;
-  readonly lunch: Recipe;
-  readonly dinner: Recipe;
+  readonly datestring: string;
+  lunch?: Recipe;
+  dinner?: Recipe;
 
-  constructor(date: DateTime, lunch: Recipe, dinner: Recipe) {
+  constructor(date: DateTime, lunch?: Recipe, dinner?: Recipe) {
     this.date = date;
     this.lunch = lunch;
     this.dinner = dinner;
+
+    this.datestring = date.toISODate();
   }
 }
 
 class Mealplan {
   start: DateTime;
   end: DateTime;
-  days?: Day[];
+  days: Day[];
 
   constructor(start: DateTime, end: DateTime, days: Day[]) {
     this.start = start;

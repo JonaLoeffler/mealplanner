@@ -25,7 +25,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
-import Ingredients from "./../components/Ingredients.vue";
+import Ingredients from "./components/Ingredients.vue";
 
 export default defineComponent({
   name: "Recipe",

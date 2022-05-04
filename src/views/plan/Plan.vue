@@ -1,8 +1,10 @@
 <template>
-  <div class="">
-    <router-view class="" />
+  <div class="flex flex-col h-full">
+    <div class="grow overflow-y-scroll">
+      <router-view />
+    </div>
 
-    <ul class="steps w-full absolute bottom-0 mb-2">
+    <ul class="steps shrink-0 px-2 py-3">
       <li
         class="step"
         :class="classObject(step.name)"

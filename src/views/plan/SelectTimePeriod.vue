@@ -1,69 +1,50 @@
 <template>
-  <div class="mx-3">
-    <div class="flex flex-col mb-10">
-      <span class="text-9xl text-center">
-        {{ days.toFixed(0) }}
-      </span>
-      <div class="text-4xl text-center">
-        <span v-if="days == 1">Tag</span>
-        <span v-else>Tage</span>
-      </div>
-      <div class="text-2xl text-center">
-        <span>{{ start.setLocale("de").toFormat("EEEE") }}</span>
-        -
-        <span>{{ end.setLocale("de").toFormat("EEEE") }}</span>
-      </div>
-    </div>
+  <day-header />
 
-    <div class="form-control w-full mb-3">
-      <label class="label">
-        <span class="label-text font-bold">Beginn</span>
-      </label>
-      <input
-        name="start"
-        type="date"
-        class="input input-bordered w-full"
-        v-model="_start"
-      />
-      <label class="label">
-        <span
-          class="label-text-alt"
-          v-for="button in startDates"
-          v-bind:key="button.text"
+  <div class="form-control w-full mb-3">
+    <label class="label">
+      <span class="label-text font-bold">Beginn</span>
+    </label>
+    <input
+      name="start"
+      type="date"
+      class="input input-bordered w-full"
+      v-model="_start"
+    />
+    <label class="label">
+      <span class="label-text-alt" v-for="date in startDates" :key="date">
+        <button
+          class="btn btn-xs"
+          @click="_start = $event.target.value"
+          :value="date"
         >
-          <button
-            class="btn btn-xs"
-            @click="_start = $event.target.value"
-            :value="button.value"
-          >
-            {{ button.text }}
-          </button>
-        </span>
-      </label>
-    </div>
+          {{ date.setLocale("de").toFormat("EEE dd.MM.") }}
+        </button>
+      </span>
+    </label>
+  </div>
 
-    <div class="form-control w-full mb-3">
-      <label class="label">
-        <span class="label-text font-bold">Ende</span>
-      </label>
-      <input
-        name="start"
-        type="date"
-        class="input input-bordered w-full"
-        v-model="_end"
-      />
-      <label class="label">
-        <span class="label-text-alt" v-for="date in endDates" v-bind:key="date">
-          <button
-            class="btn btn-xs"
-            @click="_end = $event.target.value"
-            :value="date"
-          >
-            {{ date.setLocale("de").toFormat("EEE dd.MM.") }}
-          </button>
-        </span>
-      </label>
-    </div>
+  <div class="form-control w-full mb-3">
+    <label class="label">
+      <span class="label-text font-bold">Ende</span>
+    </label>
+    <input
+      name="start"
+      type="date"
+      class="input input-bordered w-full"
+      v-model="_end"
+    />
+    <label class="label">
+      <span class="label-text-alt" v-for="date in endDates" v-bind:key="date">
+        <button
+          class="btn btn-xs"
+          @click="_end = $event.target.value"
+          :value="date"
+        >
+          {{ date.setLocale("de").toFormat("EEE dd.MM.") }}
+        </button>
+      </span>
+    </label>
   </div>
 </template>
 
@@ -71,16 +52,18 @@
 import { DateTime } from "luxon";
 import { mapGetters } from "vuex";
 import { defineComponent } from "vue";
+import DayHeader from "./components/DayHeader.vue";
 
 export default defineComponent({
   name: "SelectTimePeriod",
+  components: { DayHeader },
   data() {
     return {
       startDates: [
-        { text: "Heute", value: DateTime.now().plus({ days: 0 }) },
-        { text: "Morgen", value: DateTime.now().plus({ days: 1 }) },
-        { text: "Übermorgen", value: DateTime.now().plus({ days: 2 }) },
-        { text: "in 3 Tagen", value: DateTime.now().plus({ days: 3 }) },
+        DateTime.now().plus({ days: 0 }),
+        DateTime.now().plus({ days: 1 }),
+        DateTime.now().plus({ days: 2 }),
+        DateTime.now().plus({ days: 3 }),
       ],
       endDates: [
         DateTime.now().plus({ days: 4 }),
@@ -94,30 +77,28 @@ export default defineComponent({
     ...mapGetters({
       start: "plan/getStart",
       end: "plan/getEnd",
+      days: "plan/days",
     }),
-    days: function (): number {
-      return this.end.diff(this.start, "days").days;
-    },
     _start: {
       get(): DateTime {
-        return this.$store.getters["plan/getStart"].toISODate();
+        return this.start.toISODate();
       },
       set(value: string | DateTime): void {
         const date =
           value instanceof DateTime ? value : DateTime.fromISO(value);
 
-        this.$store.commit("plan/setStart", date);
+        this.$store.dispatch("plan/setStart", date);
       },
     },
     _end: {
       get(): DateTime {
-        return this.$store.getters["plan/getEnd"].toISODate();
+        return this.end.toISODate();
       },
       set(value: string | DateTime): void {
         const date =
           value instanceof DateTime ? value : DateTime.fromISO(value);
 
-        this.$store.commit("plan/setEnd", date);
+        this.$store.dispatch("plan/setEnd", date);
       },
     },
   },

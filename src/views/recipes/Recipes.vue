@@ -16,7 +16,7 @@
 <script lang="ts">
 import { mapGetters, mapMutations } from "vuex";
 import { defineComponent } from "vue";
-import { Recipe } from "../../lib/types";
+import { Recipe } from "../../../lib/types";
 
 export default defineComponent({
   name: "Recipes",

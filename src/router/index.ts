@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-import Plan from "@/views/Plan.vue";
-import SelectTimePeriod from "@/views/plan/SelectTimePeriod.vue";
+import Plan from "@/views/plan/Plan.vue";
 import SelectMeals from "@/views/plan/SelectMeals.vue";
 import GroceryList from "@/views/plan/GroceryList.vue";
+import SelectTimePeriod from "@/views/plan/SelectTimePeriod.vue";
 
 import Home from "@/views/Home.vue";
-import Recipe from "@/views/Recipe.vue";
-import Recipes from "@/views/Recipes.vue";
+import Recipe from "@/views/recipes/Recipe.vue";
+import Recipes from "@/views/recipes/Recipes.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
