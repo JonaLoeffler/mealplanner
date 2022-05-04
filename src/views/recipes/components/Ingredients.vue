@@ -13,7 +13,11 @@
         <tbody>
           <tr v-for="ingredient in converted" v-bind:key="ingredient">
             <td class="text-right">{{ ingredient.amount.toFixed(1) }}</td>
-            <td>{{ ingredient.unit }}</td>
+            <td>
+              <span v-if="!['pc', 'Stk.'].includes(ingredient.unit)">{{
+                ingredient.unit
+              }}</span>
+            </td>
             <td>{{ ingredient.name }}</td>
           </tr>
         </tbody>

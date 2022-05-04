@@ -1,5 +1,5 @@
 import { MutationTree, GetterTree, ActionTree, ActionContext } from "vuex";
-import { Mealplan, Day } from "../../../lib/types";
+import { Mealplan, Day, Ingredient, Recipe } from "../../../lib/types";
 import { DateTime } from "luxon";
 
 interface State {
@@ -16,6 +16,9 @@ interface Getters extends GetterTree<State, unknown> {
   getStart: (state: State) => DateTime;
   getEnd: (state: State) => DateTime;
   getDays: (state: State) => Day[];
+
+  ingredients: (state: State) => Ingredient[];
+
   days: (state: State) => number;
   dates: (state: State, getters: Getters) => DateTime[];
 }
@@ -98,6 +101,33 @@ const getters: Getters = {
   getStart: (state: State): DateTime => state.new.start,
   getEnd: (state: State): DateTime => state.new.end,
   getDays: (state: State): Day[] => state.new.days,
+
+  recipes: (state: State): string[] =>
+    state.new.days
+      .flatMap((day: Day) => [day.lunch, day.dinner])
+      .filter((item: Recipe | undefined): item is Recipe => !!item)
+      .map((r) => r.title),
+
+  ingredients: (state: State): Ingredient[] =>
+    state.new.days
+      .flatMap((day: Day) => [day.lunch, day.dinner])
+      .filter((item: Recipe | undefined): item is Recipe => !!item)
+      .flatMap((recipe: Recipe) => recipe.ingredients)
+      .filter((item: Ingredient | undefined): item is Ingredient => !!item)
+      .reduce(function (prev: Ingredient[], curr: Ingredient) {
+        // is curr in prev?
+        const item = prev.find((item) => item.name == curr.name);
+
+        if (item && item.unit == curr.unit) {
+          item.amount += curr.amount;
+        } else {
+          prev = prev.concat([
+            new Ingredient(curr.name, curr.unit, curr.amount),
+          ]);
+        }
+
+        return prev;
+      }, []),
   dates: (state: State, getters: Getters): DateTime[] =>
     [...Array(getters.days).keys()].map((i: number) =>
       state.new.start.plus({ days: i })

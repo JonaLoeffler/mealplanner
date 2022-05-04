@@ -51,7 +51,6 @@
 <script lang="ts">
 import { mapGetters } from "vuex";
 import { defineComponent } from "vue";
-import { Day } from "../../../lib/types";
 
 export default defineComponent({
   name: "SelectMeals",
@@ -63,7 +62,7 @@ export default defineComponent({
       get() {
         return this.$store.getters["plan/getDays"];
       },
-      set(days: Day[]) {
+      set() {
         //
       },
     },
