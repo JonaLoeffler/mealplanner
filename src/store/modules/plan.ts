@@ -1,6 +1,7 @@
 import { MutationTree, GetterTree, ActionTree, ActionContext } from "vuex";
 import { Mealplan, Day, Ingredient, Recipe } from "../../../lib/types";
 import { DateTime } from "luxon";
+import { convertToMetric } from "../../../lib/convert";
 
 interface State {
   new: Mealplan;
@@ -114,6 +115,7 @@ const getters: Getters = {
       .filter((item: Recipe | undefined): item is Recipe => !!item)
       .flatMap((recipe: Recipe) => recipe.ingredients)
       .filter((item: Ingredient | undefined): item is Ingredient => !!item)
+      .map(convertToMetric) // convert to metric so ingredients can be added
       .reduce(function (prev: Ingredient[], curr: Ingredient) {
         // is curr in prev?
         const item = prev.find((item) => item.name == curr.name);

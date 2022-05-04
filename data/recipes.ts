@@ -6,9 +6,9 @@ const recipes: Cookbook = [
     portions: 2,
     ingredients: [
       {
-        name: "Knolle Knoblauch",
+        name: "Zehen Knoblauch",
         unit: "pc",
-        amount: 0.5,
+        amount: 7,
       },
       {
         name: "Petersilie, frisch",
@@ -75,7 +75,7 @@ const recipes: Cookbook = [
         amount: 1,
       },
       {
-        name: "Knoblauch",
+        name: "Zehen Knoblauch",
         unit: "Stk.",
         amount: 2,
       },
