@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === "gh-pages" ? "/mealplanner/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/mealplanner/" : "/",
   configureWebpack: {
     devtool: "source-map",
   },
