@@ -1,19 +1,21 @@
 <template>
-  <div class="flex flex-col h-full">
-    <div class="grow overflow-y-scroll">
-      <router-view />
-    </div>
+  <div class="container mx-auto h-full">
+    <div class="flex flex-col h-full">
+      <div class="grow overflow-y-scroll">
+        <router-view />
+      </div>
 
-    <ul class="steps shrink-0 px-2 py-3">
-      <li
-        class="step"
-        :class="classObject(step.name)"
-        v-for="step in steps"
-        v-bind:key="step.name"
-      >
-        <router-link :to="{ name: step.name }">{{ step.title }}</router-link>
-      </li>
-    </ul>
+      <ul class="steps shrink-0 px-2 py-3">
+        <li
+          class="step"
+          :class="classObject(step.name)"
+          v-for="step in steps"
+          v-bind:key="step.name"
+        >
+          <router-link :to="{ name: step.name }">{{ step.title }}</router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
