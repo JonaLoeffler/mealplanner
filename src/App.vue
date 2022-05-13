@@ -19,18 +19,22 @@
       <side-menu />
     </div>
   </div>
+
+  <logout-modal />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Navbar from "@/components/Navbar.vue";
 import SideMenu from "@/components/SideMenu.vue";
+import LogoutModal from "@/components/LogoutModal.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     Navbar,
     SideMenu,
+    LogoutModal,
   },
   watch: {
     $route() {
@@ -38,6 +42,9 @@ export default defineComponent({
         (this.$refs.navbar as { checked: boolean }).checked = false;
       });
     },
+  },
+  mounted() {
+    this.$store.dispatch("auth/initialize");
   },
 });
 </script>

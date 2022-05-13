@@ -13,6 +13,18 @@
         </div>
       </div>
     </div>
+
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Einkaufsliste auswählen</h2>
+
+        <ul>
+          <li v-for="list in lists" :key="list.id">
+            {{ list.displayName }}
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,7 +43,11 @@ export default defineComponent({
       start: "plan/getStart",
       end: "plan/getEnd",
       ingredients: "plan/ingredients",
+      lists: "list/all",
     }),
+  },
+  mounted() {
+    if (this.$store.getters["auth/user"]) this.$store.dispatch("list/fetch");
   },
 });
 </script>

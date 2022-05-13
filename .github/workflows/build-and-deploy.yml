@@ -16,6 +16,8 @@ jobs:
         run: |
           npm install
           npm run build
+        env:
+          VUE_APP_URL: ${{ secrets.VUE_APP_URL }}
 
       - name: Deploy frontend 🚀
         uses: easingthemes/ssh-deploy@main
