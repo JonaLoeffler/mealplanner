@@ -6,6 +6,7 @@
           Einkaufsliste
           <label
             for="select-list-modal"
+            @click="fetch"
             class="btn btn-accent btn-xs float-right modal-button"
           >
             <span v-if="selected">{{ displayName }}</span>
@@ -18,7 +19,17 @@
         </p>
 
         <div class="mt-4">
-          <ingredients :ingredients="ingredients" />
+          <ingredients :ingredients="ingredients" v-slot="slotProps">
+            <label class="label cursor-pointer">
+              <input
+                v-model="groceries"
+                :value="JSON.parse(JSON.stringify(slotProps.ingredient))"
+                type="checkbox"
+                checked="checked"
+                class="checkbox checkbox-secondary"
+              />
+            </label>
+          </ingredients>
         </div>
       </div>
     </div>
@@ -28,6 +39,7 @@
 <script lang="ts">
 import { mapGetters } from "vuex";
 import { defineComponent } from "vue";
+import { Ingredient } from "../../../lib/types";
 import Ingredients from "../recipes/components/Ingredients.vue";
 
 export default defineComponent({
@@ -44,9 +56,19 @@ export default defineComponent({
       selected: "list/selected",
       displayName: "list/truncatedDisplayName",
     }),
+    groceries: {
+      get(): Ingredient[] {
+        return this.$store.getters["plan/groceries"];
+      },
+      set(items: Ingredient[]): void {
+        this.$store.commit("plan/setGroceries", items);
+      },
+    },
   },
-  mounted() {
-    if (this.$store.getters["auth/user"]) this.$store.dispatch("list/fetch");
+  methods: {
+    fetch() {
+      if (this.$store.getters["auth/user"]) this.$store.dispatch("list/fetch");
+    },
   },
 });
 </script>

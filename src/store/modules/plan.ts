@@ -5,12 +5,14 @@ import { convertToMetric } from "../../../lib/convert";
 
 interface State {
   new: Mealplan;
+  groceries: Ingredient[];
 }
 
 interface Mutations extends MutationTree<State> {
   setStart(state: State, start: DateTime): void;
   setEnd(state: State, start: DateTime): void;
   syncDays(state: State, dates: DateTime[]): void;
+  setGroceries(state: State, item: Ingredient[]): void;
 }
 
 interface Getters extends GetterTree<State, unknown> {
@@ -19,6 +21,7 @@ interface Getters extends GetterTree<State, unknown> {
   getDays: (state: State) => Day[];
 
   ingredients: (state: State) => Ingredient[];
+  groceries: (state: State) => Ingredient[];
 
   days: (state: State) => number;
   dates: (state: State, getters: Getters) => DateTime[];
@@ -36,6 +39,7 @@ const state: State = {
     DateTime.now().plus({ days: 7 }),
     [] as Day[]
   ),
+  groceries: [],
 };
 
 const mutations: Mutations = {
@@ -81,6 +85,10 @@ const mutations: Mutations = {
     state.new.days = old
       .concat(next.map((d) => new Day(d)))
       .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+  },
+
+  setGroceries(state: State, items: Ingredient[]): void {
+    state.groceries = items;
   },
 };
 
@@ -130,6 +138,9 @@ const getters: Getters = {
 
         return prev;
       }, []),
+
+  groceries: (state: State) => state.groceries,
+
   dates: (state: State, getters: Getters): DateTime[] =>
     [...Array(getters.days).keys()].map((i: number) =>
       state.new.start.plus({ days: i })

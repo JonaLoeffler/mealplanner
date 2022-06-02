@@ -14,7 +14,7 @@
             type="radio"
             :value="list"
             v-model="selection"
-            class="radio checked:bg-blue-500"
+            class="radio radio-accent"
             :checked="selected && list.id == selected.id"
             :name="`select-${list.id}-${list.displayName}`"
           />
