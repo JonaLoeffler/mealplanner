@@ -3,6 +3,7 @@ import {
   client,
   config,
   loginRequest,
+  tokenRequest,
   ScopeRequest,
 } from "../../integrations/microsoft/msal";
 import {
@@ -60,12 +61,10 @@ const actions: Actions = {
 
     state.user = undefined;
   },
-  async token(
-    { state },
-    request
-  ): Promise<AuthenticationResult | void | undefined> {
-    request.account = state.user;
-    return client.acquireTokenSilent(request).catch((error) => {
+  async token({ state }): Promise<AuthenticationResult | void | undefined> {
+    tokenRequest.account = state.user;
+
+    return client.acquireTokenSilent(tokenRequest).catch((error) => {
       console.warn(
         "silent token acquisition fails. acquiring token using popup"
       );
@@ -73,7 +72,7 @@ const actions: Actions = {
       if (error instanceof InteractionRequiredAuthError) {
         // fallback to interaction when silent call fails
         return client
-          .acquireTokenPopup(request)
+          .acquireTokenPopup(tokenRequest)
           .then((tokenResponse) => {
             return tokenResponse;
           })

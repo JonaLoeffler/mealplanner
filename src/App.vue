@@ -21,6 +21,7 @@
   </div>
 
   <logout-modal />
+  <select-list-modal />
 </template>
 
 <script lang="ts">
@@ -28,6 +29,7 @@ import { defineComponent } from "vue";
 import Navbar from "@/components/Navbar.vue";
 import SideMenu from "@/components/SideMenu.vue";
 import LogoutModal from "@/components/LogoutModal.vue";
+import SelectListModal from "@/components/SelectListModal.vue";
 
 export default defineComponent({
   name: "App",
@@ -35,6 +37,7 @@ export default defineComponent({
     Navbar,
     SideMenu,
     LogoutModal,
+    SelectListModal,
   },
   watch: {
     $route() {

@@ -2,7 +2,16 @@
   <div class="container mx-auto">
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
-        <h2 class="card-title">Einkaufsliste</h2>
+        <h2 class="card-title">
+          Einkaufsliste
+          <label
+            for="select-list-modal"
+            class="btn btn-accent btn-xs float-right modal-button"
+          >
+            <span v-if="selected">{{ displayName }}</span>
+            <span v-else>keine Liste ausgewählt</span>
+          </label>
+        </h2>
         <p>
           {{ start.setLocale("de").toFormat("EEE dd.MM.") }} -
           {{ end.setLocale("de").toFormat("EEE dd.MM.") }}
@@ -11,18 +20,6 @@
         <div class="mt-4">
           <ingredients :ingredients="ingredients" />
         </div>
-      </div>
-    </div>
-
-    <div class="card bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title">Einkaufsliste auswählen</h2>
-
-        <ul>
-          <li v-for="list in lists" :key="list.id">
-            {{ list.displayName }}
-          </li>
-        </ul>
       </div>
     </div>
   </div>
@@ -44,6 +41,8 @@ export default defineComponent({
       end: "plan/getEnd",
       ingredients: "plan/ingredients",
       lists: "list/all",
+      selected: "list/selected",
+      displayName: "list/truncatedDisplayName",
     }),
   },
   mounted() {
